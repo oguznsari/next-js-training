@@ -1,14 +1,29 @@
 import React from "react";
 import styles from "./page.module.css";
 import Image from "next/image";
+import { notFound } from "next/navigation";
 
-const Post = () => {
+async function getData(id) {
+    const res = await fetch(
+        `https://jsonplaceholder.typicode.com/posts/${id}`,
+        { cache: 'no-store' }
+    );
+
+    if (!res.ok) {
+        return notFound();
+    }
+
+    return res.json()
+}
+
+const Post = async ({ params }) => {
+    const data = await getData(params.id);
     return (
         <div className={styles.container}>
             <div className={styles.top}>
                 <div className={styles.info}>
                     <h1 className={styles.title}>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam, est? Distinctio earum repudiandae, eius aperiam ducimus nobis, reiciendis quaerat quo deserunt aut magnam quidem sit veniam voluptates, sequi enim sint.
+                        {data.title}
                     </h1>
                     <p className={styles.desc}>
                         Lorem ipsum dolor, sit amet consectetur adipisicing elit. Temporibus quasi, maxime dolorem quas unde neque, totam sequi ducimus, sed veniam modi assumenda ullam quidem vitae corporis. Eum voluptas corporis quibusdam.
