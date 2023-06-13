@@ -5,7 +5,7 @@ import { notFound } from "next/navigation";
 
 async function getData(id) {
     const res = await fetch(
-        `https://jsonplaceholder.typicode.com/posts/${id}`,
+        `http://localhost:3000/api/posts/${id}`,
         { cache: 'no-store' }
     );
 
@@ -26,22 +26,22 @@ const Post = async ({ params }) => {
                         {data.title}
                     </h1>
                     <p className={styles.desc}>
-                        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Temporibus quasi, maxime dolorem quas unde neque, totam sequi ducimus, sed veniam modi assumenda ullam quidem vitae corporis. Eum voluptas corporis quibusdam.
+                        {data.desc}
                     </p>
                     <div className={styles.author}>
                         <Image
-                            src="https://images.pexels.com/photos/6090285/pexels-photo-6090285.jpeg?auto=compress&cs=tinysrgb&w=400&lazy=load"
+                            src={data.img}
                             alt=""
                             width={40}
                             height={40}
                             className={styles.avatar}
                         />
-                        <span className={styles.username}>John Doe</span>
+                        <span className={styles.username}>{data.username}</span>
                     </div>
                 </div>
                 <div className={styles.imageContainer}>
                     <Image
-                        src="https://images.pexels.com/photos/6090285/pexels-photo-6090285.jpeg?auto=compress&cs=tinysrgb&w=400&lazy=load"
+                        src={data.img}
                         alt=""
                         fill={true}
                         className={styles.image}
@@ -51,11 +51,11 @@ const Post = async ({ params }) => {
 
             <div className={styles.content}>
                 <p className={styles.text}>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Error ipsam hic quas id ratione! Quaerat ducimus maxime dolores. Voluptatem debitis eveniet adipisci minus eos aliquam quae aut iusto dolore officiis?
+                    {data.content}
                     <br /><br />
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis non quae, delectus error saepe quaerat mollitia architecto esse ad. Dicta sit minus eaque est consectetur minima atque at facere dolore?
+                    {data.content}
                     <br /><br />
-                    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ex, porro corrupti. Optio, adipisci. Ratione voluptatem cum iure quod numquam alias voluptates eligendi! Amet quidem eos cum eum molestiae fugiat doloremque?
+                    {data.content}
                 </p>
             </div>
 
