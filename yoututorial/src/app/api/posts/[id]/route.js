@@ -21,3 +21,22 @@ export const GET = async (req, { params }) => {
         );
     }
 }
+
+export const DELETE = async (req, { params }) => {
+    const { id } = params;
+
+    try {
+        await connect();
+        await Post.findByIdAndDelete(id);
+
+        return new NextResponse(
+            "Post has been deleted",
+            { status: StatusCodes.OK }
+        );
+    } catch (error) {
+        return new NextResponse(
+            "Database Error",
+            { status: StatusCodes.INTERNAL_SERVER_ERROR }
+        );
+    }
+}
